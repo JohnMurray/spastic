@@ -1,18 +1,18 @@
 use std::collections::HashMap;
 use std::cmp::max;
 
-struct GCounter {
+pub struct GCounter {
     count: HashMap<String, u64>
 }
 
 impl GCounter {
-    fn new(node: &str) -> GCounter {
+    pub fn new(node: &str) -> GCounter {
         let mut count = HashMap::new();
         count.insert(node.to_string(), 0);
         GCounter { count }
     }
 
-    fn incr(&mut self, node: &str) {
+    pub fn incr(&mut self, node: &str) {
         if self.count.contains_key(node) {
             *(self.count.get_mut(node).unwrap()) += 1;
         } else {
@@ -20,7 +20,7 @@ impl GCounter {
         }
     }
 
-    fn merge(counters: &[&GCounter]) -> GCounter {
+    pub fn merge(counters: &[&GCounter]) -> GCounter {
         let mut merged = GCounter{ count: HashMap::new() };
         for counter in counters {
             for (k, v) in &counter.count {
@@ -35,15 +35,15 @@ impl GCounter {
         merged
     }
 
-    fn total(&self) -> u64 {
+    pub fn total(&self) -> u64 {
         self.count.values().sum()
     }
 
-    fn get_count(&self, node: &str) -> u64 {
+    pub fn get_count(&self, node: &str) -> u64 {
         *self.count.get(node).unwrap_or(&0)
     }
 
-    fn set_count(&mut self, node: &str, count: u64) {
+    pub fn set_count(&mut self, node: &str, count: u64) {
         if self.count.contains_key(node) {
             *(self.count.get_mut(node).unwrap()) = count;
         } else {
