@@ -1,0 +1,8 @@
+{
+    "watch-run.targetList": [
+        {
+            "target": "**/*.rs",
+            "task": "run-tests"
+        }
+    ]
+}

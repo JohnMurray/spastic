@@ -1,0 +1,7 @@
+{
+    "recommendations": [
+        "wayou.vscode-todo-highlight",
+        "boukichi.watch-run",
+        "rust-lang.rust-analyzer",
+    ]
+}
