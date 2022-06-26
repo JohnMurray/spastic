@@ -6,12 +6,16 @@ pub struct GCounter {
 }
 
 impl GCounter {
+    // When creating a new counter, this should be the only time we need to specify a node. I don't see a reason why we need to include 'node'
+    // in any of ther other public interfaces.
     pub fn new(node: &str) -> GCounter {
         let mut count = HashMap::new();
         count.insert(node.to_string(), 0);
         GCounter { count }
     }
 
+    // TODO: Kinda silly for this to accept a `node` value. This should just use the node-value
+    // given in new. But need to figure out how to capture that with the merge.... :thinkies:
     pub fn incr(&mut self, node: &str) {
         if self.count.contains_key(node) {
             *(self.count.get_mut(node).unwrap()) += 1;
@@ -43,6 +47,9 @@ impl GCounter {
         *self.count.get(node).unwrap_or(&0)
     }
 
+    // TODO: This is invalid garbage, what am I thinking???? - this cannot _just_ set a value, it needs to be monotonically increasing. Why is this here?
+    //     okay okay okay, I think I know why this is here. This is here for the merge function, along with the get_count. But these really need to be
+    //     private methods and we need to document why they are how they are.
     pub fn set_count(&mut self, node: &str, count: u64) {
         if self.count.contains_key(node) {
             *(self.count.get_mut(node).unwrap()) = count;
