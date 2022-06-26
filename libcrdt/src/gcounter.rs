@@ -128,4 +128,23 @@ mod test {
         assert_eq!(counter1.get_count("node1"), 20);
         assert_eq!(counter1.get_count("node2"), 20);
     }
+
+    #[test]
+    fn test_get_all_nodes() {
+        // Just validate that this is a usable API for debugging node values
+        let mut counter = GCounter::new("node1");
+        counter.incr();
+
+        let mut counter2 = GCounter::new("node2");
+        counter2.incr();
+        counter2.incr();
+
+        counter.merge(&[&counter2]);
+        
+        let nodes = vec!["node1".to_string(), "node2".to_string()];
+        for node in counter.get_nodes() {
+            assert!(nodes.contains(node));
+            counter.get_count(node);
+        }
+    }
 }
