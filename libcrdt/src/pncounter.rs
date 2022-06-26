@@ -12,12 +12,12 @@ impl PNCounter {
         }
     }
 
-    pub fn incr(&mut self, node: &str) {
-        self.p.incr(node);
+    pub fn incr(&mut self) {
+        self.p.incr();
     }
 
-    pub fn decr(&mut self, node: &str) {
-        self.n.incr(node);
+    pub fn decr(&mut self) {
+        self.n.incr();
     }
 
     pub fn get_count(&self, node: &str) -> i64 {
